@@ -19,8 +19,8 @@ Route::get('/health', [HealthController::class, 'health']);
 // Media endpoint (anonymous, served by api on /media/{key} per spec E-15)
 Route::get('/media/{key}', [MediaController::class, 'show']);
 
-// Public auth routes
-Route::post('/api/auth/login', [AuthController::class, 'login']);
+// Public auth routes (with brute-force protection rate limiting: 20 req/min)
+Route::post('/api/auth/login', [AuthController::class, 'login'])->middleware('throttle:20,1');
 
 // Protected routes (any authenticated user)
 Route::middleware([JwtAuthMiddleware::class])->group(function () {

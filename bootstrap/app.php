@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 declare(strict_types=1);
 
@@ -24,6 +24,16 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
     })
     ->withExceptions(function (Exceptions $exceptions) {
+        $exceptions->render(function (\Illuminate\Http\Exceptions\ThrottleRequestsException $e, Request $request): Response {
+            return new JsonResponse([
+                'title' => 'Too Many Requests',
+                'status' => 429,
+                'detail' => 'Too many requests. Please slow down and try again later.',
+            ], 429, [
+                'Content-Type' => 'application/problem+json; charset=utf-8',
+            ]);
+        });
+
         $exceptions->render(function (ConcurrencyConflictException $e, Request $request): Response {
             return new JsonResponse([
                 'title' => 'Concurrency conflict with another simultaneous operation',
