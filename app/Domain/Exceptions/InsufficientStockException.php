@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 declare(strict_types=1);
 
@@ -6,10 +6,11 @@ namespace App\Domain\Exceptions;
 
 final class InsufficientStockException extends DomainException
 {
-    public function __construct(string $productName, int $available, int $requested)
+    public function __construct(string $productName, int $requested, int $available)
     {
         parent::__construct(
-            sprintf("Stock insuficiente para '%s': disponible %d, solicitado %d.", $productName, $available, $requested)
+            "Insufficient stock for product '{$productName}'. Requested: {$requested}, Available: {$available}.",
+            422
         );
     }
 }

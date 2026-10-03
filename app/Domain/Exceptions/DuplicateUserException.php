@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 declare(strict_types=1);
 
@@ -8,6 +8,6 @@ final class DuplicateUserException extends DomainException
 {
     public function __construct(string $username)
     {
-        parent::__construct(sprintf("El usuario '%s' ya existe.", $username));
+        parent::__construct("User '{$username}' is already registered.", 400);
     }
 }

@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 declare(strict_types=1);
 
@@ -8,6 +8,6 @@ final class ProductNotFoundException extends DomainException
 {
     public function __construct(string $productId)
     {
-        parent::__construct(sprintf("El producto %s no existe.", $productId));
+        parent::__construct("Product not found: {$productId}.", 404);
     }
 }

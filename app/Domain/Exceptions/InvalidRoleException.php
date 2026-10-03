@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 declare(strict_types=1);
 
@@ -8,6 +8,6 @@ final class InvalidRoleException extends DomainException
 {
     public function __construct(string $role)
     {
-        parent::__construct(sprintf("Rol no válido: '%s'.", $role));
+        parent::__construct("Invalid role '{$role}'. Allowed roles are 'admin' and 'seller'.", 400);
     }
 }

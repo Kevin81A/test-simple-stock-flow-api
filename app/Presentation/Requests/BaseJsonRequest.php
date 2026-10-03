@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 declare(strict_types=1);
 
@@ -23,9 +23,9 @@ abstract class BaseJsonRequest extends FormRequest
         $fieldsStr = implode(', ', $fields);
 
         $response = new JsonResponse([
-            'title' => 'Datos de entrada no válidos',
+            'title' => 'Invalid input data',
             'status' => 400,
-            'detail' => sprintf('Datos de entrada no válidos: %s.', $fieldsStr),
+            'detail' => sprintf('Invalid input data: %s.', $fieldsStr),
             'errors' => $errors,
         ], 400, [
             'Content-Type' => 'application/problem+json; charset=utf-8',

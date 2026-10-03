@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 declare(strict_types=1);
 
@@ -26,7 +26,7 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withExceptions(function (Exceptions $exceptions) {
         $exceptions->render(function (ConcurrencyConflictException $e, Request $request): Response {
             return new JsonResponse([
-                'title' => 'Conflicto con otra operación simultánea',
+                'title' => 'Concurrency conflict with another simultaneous operation',
                 'status' => 409,
                 'detail' => $e->getMessage(),
             ], 409, [
@@ -40,7 +40,7 @@ return Application::configure(basePath: dirname(__DIR__))
                 return response('', 404, ['Content-Length' => '0']);
             }
             return new JsonResponse([
-                'title' => 'Regla de negocio violada',
+                'title' => 'Business rule violated',
                 'status' => $status,
                 'detail' => $e->getMessage(),
             ], $status, [
@@ -61,9 +61,9 @@ return Application::configure(basePath: dirname(__DIR__))
         $exceptions->render(function (\Throwable $e, Request $request): ?Response {
             if ($request->is('api/*') || $request->is('media/*') || $request->is('health')) {
                 return new JsonResponse([
-                    'title' => 'Error interno',
+                    'title' => 'Internal server error',
                     'status' => 500,
-                    'detail' => 'Ocurrió un error inesperado.',
+                    'detail' => 'An unexpected error occurred.',
                 ], 500, [
                     'Content-Type' => 'application/problem+json; charset=utf-8',
                 ]);
